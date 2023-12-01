@@ -1,0 +1,25 @@
+.sales {
+    margin-top: 40px;
+}
+
+.sales-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.option-page {
+    padding: 6px;
+    margin: 0 9px;
+    font-size: 1.6rem;
+    color: #666;
+
+    &:focus {
+        outline: none !important;
+        box-shadow: 0 1px 2px 1px #adc178;
+    }
+}
+
+.sales-total {
+    font-size: 2.2rem;
+    margin-top: 9px;
+}

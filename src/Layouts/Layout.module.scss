@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-slider {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.side-bar {
+    margin: 75px 0 25px 0;
+}
+
+.content {
+    flex: 1;
+    margin-top: 10px;
+}

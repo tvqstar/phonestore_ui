@@ -1,0 +1,118 @@
+.product-item {
+    display: block;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: transform ease-in 0.05s;
+    background-color: #ced4da;
+    margin-bottom: 45px;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+.product-link {
+    position: relative;
+}
+
+.imgPro {
+    padding-top: 100%;
+    background: no-repeat center / cover;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.product-name {
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 5px;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    color: var(--text-color);
+    overflow: hidden;
+    // display: -webkit-box;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.price {
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inStock {
+    margin-left: 6px;
+    font-size: 1.6rem;
+    // color: #888;
+    // text-decoration: line-through;
+}
+
+.price-current {
+    font-size: 1.6rem;
+    // color: var(--primary);
+    margin: 0 5px;
+}
+
+.product-favourite {
+    position: absolute;
+    top: 10px;
+    left: -4px;
+    // display: flex;
+    width: 72px;
+    font-size: 1.3rem;
+    padding-right: 4px;
+    background-color: #fb5607;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    .icon_favourite {
+        color: #fff;
+    }
+
+    span {
+        color: #fff;
+    }
+
+    ::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        filter: brightness(60%);
+        border-top: 4px solid #fb5607;
+        border-left: 4px solid transparent;
+    }
+}
+
+// .add-cart {
+//     width: 100%;
+//     background-color: #ee4d2d;
+//     color: #f6fff8;
+
+//     &:hover {
+//         background-color: #6b9080;
+//     }
+// }
+
+.loading-icon {
+    font-size: 2.5rem;
+    transform: translateY(-50%);
+    color: #fff
+}
+
+.loading-icon {
+        animation: loading 1s linear;
+    
+    @keyframes loading {
+        from {
+            transform: translateY(-50%) rotate(0);
+        }
+        to {
+            transform: translateY(-50%) rotate(360deg);
+        }
+    }
+}

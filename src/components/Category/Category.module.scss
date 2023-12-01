@@ -1,0 +1,28 @@
+.title {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.cate-list {
+    list-style-type: none;
+}
+
+.list-item {
+    display: block;
+    font-size: 2rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    text-align: initial;
+    padding: 4px 0;
+
+    &:hover {
+        color: var(--primary);
+        transform: translateX(2px);
+    }
+
+    &.active {
+        background-color: #ccc;
+    }
+}

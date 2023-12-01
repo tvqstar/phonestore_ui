@@ -1,0 +1,150 @@
+
+.heading-cart {
+    margin: 15px 0;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.list-cart {
+    min-height: 70vh;
+}
+
+.cart-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 !important;
+    box-shadow: 0 1px 2px 0 #adc178;
+    border-radius: 4px;
+}
+
+.cart-item {
+    padding: 0px !important;
+}
+
+.item-img {
+    padding-top: 80%;
+    width: 80%;
+    background: no-repeat center / cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.item-desc {
+    margin-top: 5px;
+    font-size: 1.8rem;
+    text-align: initial;
+    color: #666;
+    height: 5.4rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.value {
+    margin: 5px 12px;
+    font-size: 2rem;
+}
+
+.prev {
+    font-size: 1.4rem;
+    padding: 5px 12px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.next {
+    font-size: 1.4rem;
+    padding: 5px 12px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.delete,
+.price {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.delete {
+    padding: 10px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 15px 20px 0;
+    font-size: 2rem;
+}
+
+.btn-cart {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.wrap {
+    margin-top: 10px;
+    width: 600px;
+    max-width: 600px;
+}
+
+.header-info {
+    text-align: center;
+    margin: 6px 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 5px;
+}
+
+.input-title {
+    font-size: 2.2rem;
+}
+
+.input {
+    margin-top: 4px;
+    margin-bottom: 10px;
+    padding: 4px;
+    color: #333;
+    caret-color: #f44336;
+    font-size: 1.8rem;
+    border: 1px solid #ccc;
+    width: 90%;
+
+    &:focus-within {
+        border-color: #457b9d;
+    }
+}
+
+.address-input {
+    min-width: 90%;
+    max-width: 90%;
+
+    padding: 4px;
+    font-size: 1.9rem;
+    border: 1px solid #ccc;
+    caret-color: #f44336;
+    color: #333;
+
+    min-height: 100px;
+    max-height: 100px;
+    margin: 5px 0;
+
+    &:focus-within {
+        outline: none;
+        border: 1px solid #457b9d;
+    }
+}

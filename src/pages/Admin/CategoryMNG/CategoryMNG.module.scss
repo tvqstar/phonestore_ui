@@ -1,0 +1,386 @@
+.content {
+    width: 600px;
+    max-width: 600px;
+}
+
+.btn-group {
+    display: flex;
+    margin-top: 8px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.6rem;
+    padding: 8px;
+    color: #fff;
+    border-radius: 4px;
+    min-width: 80px;
+    + .btn {
+        margin-left: 5px;
+    }
+
+    &.btn-add-product {
+        background-color: #00b4d8;
+    }
+
+    &.btn-save {
+        background-color: #3194d4;
+        margin-right: 5px;
+    }
+
+    &.btn-cancel {
+        background-color: #f44336;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.option-page {
+    padding: 6px;
+    margin: 0 9px;
+    font-size: 1.6rem;
+    color: #666;
+
+    &:focus {
+        outline: none !important;
+        box-shadow: 0 1px 2px 1px #adc178;
+    }
+}
+
+.wrapper {
+    width: 100%;
+    margin-top: 22px;
+    border-collapse: collapse;
+
+    & th,
+    td {
+        border: 1px solid #ccc;
+        overflow: hidden;
+    }
+}
+
+.trbody {
+    & td {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:nth-of-type(2n) {
+        background-color: #f8f8f8;
+    }
+    min-height: 60px;
+    text-align: center;
+}
+
+.trhead {
+    & th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    min-height: 38px;
+    background-color: #219657;
+    color: #fff;
+}
+
+.row-text {
+    font-size: 2.2rem;
+}
+
+.item-img {
+    padding-top: 100%;
+    width: 100%;
+    margin: 3px 0;
+    background: no-repeat center / contain;
+    border-radius: 4px;
+}
+
+.item-desc {
+    margin-top: 5px;
+    font-size: 1.8rem;
+    text-align: initial;
+    color: #666;
+    height: 7.2rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.color-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-item {
+    display: flex;
+    font-size: 1.7rem;
+    text-align: initial;
+    color: #666;
+    margin-top: 5px;
+}
+
+.item {
+    display: flex;
+    margin: 0 2px;
+}
+
+.action {
+    display: flex;
+}
+
+.edit,
+.delete {
+    background-color: transparent;
+    font-size: 2.2rem;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.delete-icon {
+    color: red;
+}
+
+.edit-icon {
+    color: #3194d4;
+}
+
+.add-product-title {
+    font-size: 2.2rem;
+    padding: 10px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.add-product-form {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-title {
+    font-size: 2.2rem;
+}
+
+.input {
+    margin: 0 6px;
+    padding: 4px;
+    color: #333;
+    caret-color: #f44336;
+    font-size: 1.8rem;
+    border: 1px solid #ccc;
+
+    &:focus-within {
+        border-color: #457b9d;
+    }
+}
+
+.color-checked {
+    display: flex;
+}
+
+.color-checked-item {
+    display: flex;
+    margin: 3px 2px;
+    font-size: 1.5rem;
+    label {
+        font-size: 2rem;
+        color: #333;
+        margin-right: 3px;
+    }
+    p {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-right: 3px;
+    }
+}
+
+.clear-color {
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 1.6rem;
+    background-color: transparent;
+    color: red;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+
+.description-input {
+    min-width: 98%;
+    max-width: 98%;
+
+    padding: 4px;
+    font-size: 1.9rem;
+    border: 1px solid #ccc;
+    caret-color: #f44336;
+    color: #333;
+
+    min-height: 150px;
+    max-height: 150px;
+    margin: 5px 0;
+
+    &:focus-within {
+        outline: none;
+        border: 1px solid #457b9d;
+    }
+}
+
+.loading-icon {
+    display: block;
+    font-size: 2.5rem;
+    color: #fff;
+    animation: loading 1s linear infinite;
+
+    @keyframes loading {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.footer-btn {
+    display: flex;
+    margin: 10px 22px;
+    justify-content: flex-end;
+}
+
+.content {
+    width: 600px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-value {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 5px;
+}
+
+.edit-value {
+    display: flex;
+    font-size: 2rem;
+    margin: 5px;
+}
+
+.first-child {
+    min-width: 115px;
+}
+
+.value-title {
+    display: block;
+    width: 130px;
+}
+
+.watch,
+.check,
+.delete {
+    min-height: 30px;
+    min-width: 30px;
+    background-color: transparent;
+    font-size: 1.8rem;
+    padding: 3px 5px;
+    margin: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.watch {
+    color: #9f86c0;
+    background-color: rgba(159, 134, 192, 0.1);
+}
+
+.check {
+    color: #3194d4;
+    background-color: rgba(49, 148, 212, 0.1);
+}
+
+.close-btn {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 7px;
+}
+
+.close-items {
+    min-height: 35px;
+    min-width: 65px;
+    color: #fff;
+    background-color: #f44336;
+}
+
+.cart-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 !important;
+    box-shadow: 0 1px 2px 0 #adc178;
+    border-radius: 4px;
+}
+
+.cart-item {
+    padding: 0px !important;
+}
+
+.item-img {
+    padding-top: 80%;
+    width: 80%;
+    background: no-repeat center / cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.item-desc {
+    margin-top: 5px;
+    font-size: 1.8rem;
+    text-align: initial;
+    color: #666;
+    height: 5.4rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.value {
+    margin: 5px 12px;
+    font-size: 2rem;
+}
+
+.delete,
+.price {
+    font-size: 2rem;
+    color: var(--primary);
+}

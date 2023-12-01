@@ -1,0 +1,126 @@
+.list-order {
+    margin-bottom: 10px;
+}
+
+.heading-cart {
+    margin: 15px 0;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.list-items {
+    border-top: 1px solid #000;
+    padding-bottom: 30px;
+}
+
+.cart-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 !important;
+    box-shadow: 0 1px 2px 0 #adc178;
+    border-radius: 4px;
+}
+
+.cart-item {
+    padding: 0px !important;
+}
+
+.item-img {
+    padding-top: 70%;
+    width: 70%;
+    background: no-repeat center / cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.item-desc {
+    margin-top: 5px;
+    font-size: 1.8rem;
+    text-align: initial;
+    color: #666;
+    height: 5.4rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.value {
+    margin: 5px 12px;
+    font-size: 2rem;
+}
+
+.prev {
+    font-size: 1.4rem;
+    padding: 5px 12px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.next {
+    font-size: 1.4rem;
+    padding: 5px 12px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.price,
+.status {
+    color: #ee4d2d;
+    font-size: 2rem;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 15px 20px 0;
+    font-size: 2rem;
+}
+
+.loading-icon {
+    display: block;
+    font-size: 2.5rem;
+    color: red;
+    animation: loading 1s linear infinite;
+
+    @keyframes loading {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+
+        // from {
+        //     transform: translateY(-50%) rotate(0);
+        // }
+        // to {
+        //     transform: translateY(-50%) rotate(360deg);
+        // }
+    }
+}
+
+.btn-cart {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.wrap {
+    margin-top: 10px;
+    width: 600px;
+    max-width: 600px;
+}
+
+.sub {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
