@@ -15,14 +15,17 @@
     line-height: 1.8rem;
     font-weight: 500;
     text-align: initial;
-    padding: 4px 0;
+    padding: 12px 6px;
+    border-radius: 4px;
 
     &:hover {
         color: var(--primary);
         transform: translateX(2px);
+        background-color: #f8f9fa;
     }
 
     &.active {
-        background-color: #ccc;
+        background-color: var(--primary);
+        color: #fff;
     }
 }

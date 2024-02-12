@@ -9,9 +9,11 @@ import Register from '../pages/Register';
 import AllProduct from '../pages/AllProduct';
 import ProductDetail from '../pages/ProductDetail';
 import Cart from '../pages/Cart';
+import CheckOut from '../pages/Cart/checkOut';
 import Order from '../pages/Order';
 import News from '../pages/News';
 import NewsDetail from '../pages/News/NewsDetail';
+import ChangePassword from '../pages/ChangePassword'
 import ProdByCate from '../pages/AllProduct/ProdByCate';
 // import User from '~/pages/User';
 // import Order from '~/pages/Order';
@@ -20,6 +22,7 @@ import AdminHome from '../pages/Admin/AdminHome';
 import ProdMNG from '../pages/Admin/ProdMNG';
 import UserMNG from '../pages/Admin/UserMNG';
 import OrderMNG from '../pages/Admin/OrderMNG';
+import OrderDetail from '../pages/Admin/OrderMNG/orderDetail';
 import CategoryMNG from '../pages/Admin/CategoryMNG';
 import NewsMNG from '../pages/Admin/NewsMNG';
 import AddNews from '../pages/Admin/NewsMNG/addNews';
@@ -32,12 +35,14 @@ const publicRoutes = [
     { path: routesConfig.login, component: Login, layout: null },
     { path: routesConfig.register, component: Register, layout: null },
     { path: routesConfig.cart, component: Cart },
+    { path: routesConfig.checkout, component: CheckOut },
     { path: routesConfig.order, component: Order },
     { path: routesConfig.product, component: AllProduct },
     { path: routesConfig.productDetail, component: ProductDetail },
     { path: routesConfig.prodByCate, component: ProdByCate },
     { path: routesConfig.news, component: News },
     { path: routesConfig.newsDetail, component: NewsDetail },
+    { path: routesConfig.changePassword, component: ChangePassword },
     { path: routesConfig.notfound, component: NotFound, layout: null },
 ];
 
@@ -47,6 +52,7 @@ const privateRoutes = [
     { path: adminRoutes.product, component: ProdMNG, layout: AdminLayout },
     { path: adminRoutes.category, component: CategoryMNG, layout: AdminLayout },
     { path: adminRoutes.order, component: OrderMNG, layout: AdminLayout },
+    { path: adminRoutes.orderDetail, component: OrderDetail, layout: AdminLayout },
     { path: adminRoutes.user, component: UserMNG, layout: AdminLayout },
     { path: adminRoutes.news, component: NewsMNG, layout: AdminLayout },
     { path: adminRoutes.addNews, component: AddNews, layout: null },

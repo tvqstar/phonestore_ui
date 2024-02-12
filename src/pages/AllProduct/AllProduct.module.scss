@@ -1,0 +1,49 @@
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.option-page {
+    padding: 6px;
+    margin: 0 9px;
+    font-size: 1.6rem;
+    color: #666;
+
+    &:focus {
+        outline: none !important;
+        box-shadow: 0 1px 2px 1px #adc178;
+    }
+}
+
+.sort-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    margin-bottom: 18px;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+}
+
+.sort-input {
+    margin: 0 5px;
+    border-radius: 10px;
+    // border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 4px;
+    font-size: 1.8rem;
+    width: 10%;
+    caret-color: var(--primary);
+
+    &:focus-within {
+        border-color: #457b9d;
+    }
+}
+
+.sort-button {
+
+}

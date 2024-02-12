@@ -18,28 +18,33 @@ const cx = classNames.bind(styles);
 function ProductDetail() {
     const { slug } = useParams();
 
-    console.log(slug);
-
     const value = useContext(DataContext);
     const [products] = value.products;
     const [user] = value.user;
     const reload = value.reload;
 
+    const detailProducts = products.filter((product) => {
+        return product.slug === slug;
+    });
+
+    // const [qtity, setQtity] = useState(1);
     const [qtity, setQtity] = useState(1);
-    const [max, setMax] = useState(1);
-    const [checked, setChecked] = useState('');
+    // const [max, setMax] = useState(1);
+    const [max, setMax] = useState(`${detailProducts[0]?.colors[0]?.inStock}`);
+    // const [checked, setChecked] = useState('');
+    const [checked, setChecked] = useState(`${detailProducts[0]?.colors[0].colorName}`);
 
     const checkedColor = (id, inStock) => {
         setChecked(`${id}`);
         setMax(inStock);
-        setQtity(inStock/inStock);
+        setQtity(inStock / inStock || 1);
     };
 
     const decrease = () => {
         if (qtity <= 1) {
             swal({
                 icon: 'error',
-                title: 'Không thể giảm nữa :(',
+                title: 'Chọn từ 1 sản phẩm',
             });
         } else {
             setQtity((prev) => prev - 1);
@@ -51,7 +56,7 @@ function ProductDetail() {
         } else {
             swal({
                 icon: 'error',
-                title: `Tối đa ${max}`,
+                title: `Chọn tối đa ${max} sản phẩm`,
             });
         }
     };
@@ -59,13 +64,38 @@ function ProductDetail() {
     const addCart = (data) => {
         const id = user._id;
 
-        if (checked === '') {
+        if (checked == 'undefined') {
             swal({
                 icon: 'error',
                 title: 'Chọn màu sắc trước khi thêm',
             });
             return;
         }
+
+        if (max == 0) {
+            swal({
+                icon: 'error',
+                title: `Hết hàng`,
+            });
+            return;
+        }
+
+        if (qtity > max) {
+            swal({
+                icon: 'error',
+                title: `Chọn tối đa ${max}`,
+            });
+            return;
+        }
+
+        if (qtity <= 0) {
+            swal({
+                icon: 'error',
+                title: `Chọn từ 1 sản phẩm`,
+            });
+            return;
+        }
+
         const items = {
             productId: data._id,
             product_name: data.name,
@@ -97,10 +127,6 @@ function ProductDetail() {
                 return res.data;
             });
     };
-
-    const detailProducts = products.filter((product) => {
-        return product.slug === slug;
-    });
 
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
@@ -159,12 +185,13 @@ function ProductDetail() {
                                     <button className={cx('prev')} onClick={() => decrease()}>
                                         <FontAwesomeIcon icon={faMinus} />
                                     </button>
-                                    <span className={cx('value')}>{qtity}</span>
+                                    {/* <span className={cx('value')}>{qtity}</span> */}
+                                    <input className={cx('value')} type="number" value={qtity} onChange={(e) => setQtity(e.target.value)} />
                                     <button className={cx('next')} onClick={() => increase()}>
                                         <FontAwesomeIcon icon={faPlus} />
                                     </button>
                                 </div>
-                                <div className={cx('max-qty')}>Số lượng tối đa {max}</div>
+                                <div className={cx('max-qty')}>{`${max == 0 ? 'Hết hàng' : `Số lượng tối đa ${max}`}`}</div>
 
                                 <Button className={cx(`${user.isAdmin == false ? '' : 'disable'}`)} primary onClick={() => addCart(detailProduct)}>
                                     Thêm vào giỏ

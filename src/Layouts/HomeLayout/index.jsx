@@ -9,7 +9,6 @@ import { Navigate } from 'react-router-dom';
 
 function DefaultLayout({ children }) {
     const cx = classNames.bind(styles);
-    const admin = true;
     // const admin = localStorage.getItem('admin');
     return (
         <>
@@ -17,10 +16,10 @@ function DefaultLayout({ children }) {
                 <Header />
                 <div className={cx('grid wide')}>
                     <div className={cx('sidebar-slider', 'row sm-gutter')}>
-                        <div className={cx('side-bar', 'col l-3')}>
+                        {/* <div className={cx('side-bar', 'col l-3')}>
                             <SideBar />
-                        </div>
-                        <div className="col l-9">
+                        </div> */}
+                        <div className="col l-12 m-12 c-12">
                             <Slider />
                         </div>
                     </div>

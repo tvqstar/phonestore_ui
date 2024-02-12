@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faCircleInfo, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleInfo, faLock, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import Tippy from '@tippyjs/react';
@@ -12,6 +12,7 @@ import routesConfig from '../../config/routes';
 import Button from '../Button';
 // import { DataContext } from '~/Provider';
 import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../../Provider';
 import Images from '../../assets/Images/Images';
 
@@ -21,6 +22,8 @@ function Header() {
     const value = useContext(DataContext);
     const [cart] = value.cart;
     const [user] = value.user;
+
+    const navigate = useNavigate();
 
     const [currentUser, setCurrentUser] = useState(false);
     const getCurrentUser = () => {
@@ -40,7 +43,7 @@ function Header() {
 
     const logout = () => {
         localStorage.removeItem('user');
-        window.location.replace('/');
+        navigate('/');
         window.location.reload(true);
     };
 
@@ -83,6 +86,11 @@ function Header() {
                                             <FontAwesomeIcon className={cx('user-link-icon')} icon={faCircleInfo} />
                                             Thông tin tài khoản
                                         </Link> */}
+
+                                        <Link className={cx('user-link')} to={routesConfig.changePassword}>
+                                            <FontAwesomeIcon className={cx('user-link-icon')} icon={faLock} />
+                                            Đổi mật khẩu
+                                        </Link>
 
                                         <Link className={cx('user-link')} to={routesConfig.order}>
                                             <FontAwesomeIcon className={cx('user-link-icon')} icon={faCircleInfo} />

@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import classNames from 'classnames/bind';
 import styles from './News.module.scss';
@@ -46,7 +48,11 @@ function News() {
                         <div className={cx('content')}>
                             <div className={cx('wrap-content')}>
                                 <div>
-                                    <img className={cx('img-news-home')} src={Images.logo} alt="Ta Van Quyet" />
+                                    <img
+                                        className={cx('img-news-home')}
+                                        src={`http://localhost:4001/api/news/image/${news.image}` || Images.logo}
+                                        alt="Ta Van Quyet"
+                                    />
                                 </div>
                                 <div className={cx('news-title')}>
                                     <h3>{news.title}</h3>
@@ -54,8 +60,10 @@ function News() {
                                 {/* <div className={cx('news-content')} dangerouslySetInnerHTML={{ __html: news.content }}></div> */}
                             </div>
                         </div>
-
-                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{moment(news.updatedAt).format('DD-MM-YYYY - HH:mm:ss')}</div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <FontAwesomeIcon className={cx('time-news')} icon={faClock} />
+                            {moment(news.updatedAt).format('DD-MM-YYYY')}
+                        </div>
                     </Link>
                 ))}
             </div>

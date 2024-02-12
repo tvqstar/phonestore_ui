@@ -26,6 +26,7 @@ function AddNews() {
     const [news, setNews] = useState({
         title: '',
         content: '',
+        image: null,
     });
 
     const changeNews = (value) => {
@@ -37,16 +38,24 @@ function AddNews() {
     const handleAddNews = async (e) => {
         try {
             e.preventDefault();
-
-            if (news.title.trim() === '' || news.content.trim() === '') {
+            setErr('');
+            if (news.title.trim() === '' || news.content.trim() === '' || !news.image) {
                 setErr('Điền đủ thông tin!');
                 return;
             }
 
+            
+            let formData = new FormData();
+            
+            formData.append('image', news.image);
+            formData.append('title', news.title);
+            formData.append('content', news.content);
+            
+
             setLoadingAdd(true);
             await delay(2000);
 
-            const res = await axios.post(`http://localhost:4001/api/news/add`, news);
+            const res = await axios.post(`http://localhost:4001/api/news/add`, formData);
             setLoadingAdd(false);
 
             if (res.data.status === 'SUCCESS') {
@@ -58,6 +67,7 @@ function AddNews() {
                 setNews({
                     title: '',
                     content: '',
+                    image: null,
                 });
                 setErr('');
                 navigate(adminRoutes.news);
@@ -118,6 +128,17 @@ function AddNews() {
                                 onChange={(e) => setNews({ ...news, title: e.target.value })}
                             />
                         </div>
+
+                        <div>
+                            <h3>Ảnh đại diện</h3>
+                            <input
+                                className={cx('input-img')}
+                                type="file"
+                                name="filename"
+                                // value={data.description}
+                                onChange={(e) => setNews({ ...news, image: e.target.files[0] })}
+                            />
+                        </div>
                         <div>
                             <h3>Nội dung</h3>
                             <ReactQuill
@@ -141,7 +162,7 @@ function AddNews() {
                     </div>
                 </div>
 
-                {err && <p style={{color: 'red', margin: '8px'}}>{err}</p>}
+                {err && <p style={{ color: 'red', margin: '8px' }}>{err}</p>}
 
                 <button className={cx('btn', 'btn-save')} style={{ marginLeft: '10px' }} onClick={(e) => handleAddNews(e)}>
                     {!loadingAdd && <p>Thêm</p>}

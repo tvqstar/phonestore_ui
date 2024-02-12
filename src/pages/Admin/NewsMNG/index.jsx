@@ -66,8 +66,8 @@ function NewsMNG() {
                 <select className={cx('option-page')} onChange={(e) => handleChangeLimit(e)}>
                     <option value={limitPage}>Lựa chọn số bản ghi</option>
                     <option value={5}>5</option>
-                    <option value={7}>7</option>
                     <option value={10}>10</option>
+                    <option value={30}>30</option>
                 </select>
             </div>
 
@@ -77,9 +77,13 @@ function NewsMNG() {
                         <div className={cx('content')}>
                             <div className={cx('wrap-content')}>
                                 <div>
-                                    <img className={cx('img-news')} src={Images.logo} alt="Ta Van Quyet" />
+                                    <img
+                                        className={cx('img-news')}
+                                        src={`http://localhost:4001/api/news/image/${news.image}` || Images.logo}
+                                        alt="Ta Van Quyet"
+                                    />
                                 </div>
-                                <div className={cx('news-title')}>
+                                <div className={cx('news-title')} style={{ marginLeft: '10px' }}>
                                     <h3>{news.title}</h3>
                                 </div>
                                 {/* <div className={cx('news-content')} dangerouslySetInnerHTML={{ __html: news.content }}></div> */}
@@ -102,7 +106,7 @@ function NewsMNG() {
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{moment(news.updatedAt).format('DD-MM-YYYY - HH:mm:ss')}</div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{moment(news.updatedAt).format('DD-MM-YYYY')}</div>
                     </div>
                 ))}
             </div>

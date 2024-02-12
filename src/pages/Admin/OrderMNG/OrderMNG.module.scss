@@ -336,6 +336,13 @@
 .check {
     color: #3194d4;
     background-color: rgba(49, 148, 212, 0.1);
+    &.disable {
+        cursor: not-allowed;
+        pointer-events: none;
+
+        color: #c0c0c0;
+        opacity: 0.3;
+    }
 }
 
 .close-btn {
@@ -370,6 +377,12 @@
     border-radius: 4px;
 }
 
+.image-order-detail {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
 .item-name {
     text-transform: uppercase;
     font-size: 2rem;
@@ -397,4 +410,23 @@
 .price {
     font-size: 2rem;
     color: var(--primary);
+}
+
+.customer {
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.customer_title {
+    font-size: 1.8rem;
+    display: flex;
+    padding: 2px 0;
+    span {
+        margin-left: 4px;
+    }
+}
+
+.customer_address {
+    padding: 0 14px;
 }

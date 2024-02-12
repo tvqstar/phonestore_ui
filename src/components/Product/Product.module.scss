@@ -10,6 +10,7 @@
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 20px 0 #ccc5b9;
     }
 }
 
@@ -71,6 +72,7 @@
 
     .icon_favourite {
         color: #fff;
+        margin: 0 3px;
     }
 
     span {
@@ -101,12 +103,12 @@
 .loading-icon {
     font-size: 2.5rem;
     transform: translateY(-50%);
-    color: #fff
+    color: #fff;
 }
 
 .loading-icon {
-        animation: loading 1s linear;
-    
+    animation: loading 1s linear;
+
     @keyframes loading {
         from {
             transform: translateY(-50%) rotate(0);

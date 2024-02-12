@@ -38,6 +38,7 @@
 .news-title {
     text-transform: uppercase;
     font-size: 1.8rem;
+    margin-left: 10px;
 }
 
 .news-content {
@@ -62,6 +63,7 @@
 
 .newsDetail-title {
     font-size: 3rem;
+    line-height: 3rem;
 }
 
 .newsDetail-content {
@@ -80,4 +82,9 @@
     height: 120px;
     width: 120px;
     object-fit: cover;
+}
+
+.time-news {
+    color: #ccc;
+    margin-right: 2px;
 }

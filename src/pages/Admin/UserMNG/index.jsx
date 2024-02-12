@@ -99,8 +99,8 @@ function UserMNG() {
                     <select className={cx('option-page')} onChange={(e) => handleChangeLimit(e)}>
                         <option value={limitPage}>Lựa chọn số bản ghi</option>
                         <option value={5}>5</option>
-                        <option value={7}>7</option>
                         <option value={10}>10</option>
+                        <option value={30}>30</option>
                     </select>
                 </div>
 
@@ -120,7 +120,7 @@ function UserMNG() {
                         {record?.map((user, index) => {
                             return (
                                 <tr key={user._id} className={cx('trbody', 'row sm-gutter')}>
-                                    <td className="col l-1 m-4 c-6">{`#${index}`}</td>
+                                    <td className="col l-1 m-4 c-6">{`#${index+1}`}</td>
 
                                     <td className="col l-2 m-4 c-6">
                                         <h4 className={cx('item-name')}>{user.username}</h4>
@@ -133,7 +133,7 @@ function UserMNG() {
                                         <div className={cx('item-name')}>{user.status == true ? 'Đang hoạt động' : 'Chặn'}</div>
                                     </td>
 
-                                    <td className="col l-3 m-4 c-6">{moment(user.updatedAt).format('DD-MM-YYYY - HH:mm:ss')}</td>
+                                    <td className="col l-3 m-4 c-6">{moment(user.updatedAt).format('DD-MM-YYYY')}</td>
 
                                     <td className="col l-1 m-4 c-6">
                                         <span className={cx('action')}>

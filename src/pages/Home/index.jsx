@@ -1,7 +1,8 @@
 import classNames from 'classnames/bind';
 import { useContext } from 'react';
 import moment from 'moment/moment';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../components/Button';
 import routesConfig from '../../config/routes';
@@ -24,7 +25,8 @@ function Home() {
     // console.log(daysAgo);
     // const [loading] = value.loading;
 
-    const products = [...pro].reverse().slice(0, 5); //Đảo ngược phần tử trong mảng
+    const products = [...pro].reverse().slice(0, 10); //Đảo ngược phần tử trong mảng
+    // const pr = pro.filter((prod) => moment().diff(prod.updatedAt, 'days') < 15 )
     const news = [...allNews].reverse().slice(0, 5); //Đảo ngược phần tử trong mảng
 
     return (
@@ -35,12 +37,16 @@ function Home() {
 
                 {!!products && (
                     <div className={cx('product-item', 'row sm-gutter')}>
-                        {products.map((pr) => moment().diff(pr.updatedAt, 'days') < 15 && <Product key={pr._id} data={pr} />)}
+                        {products.map((pr) => (
+                            <Product key={pr._id} data={pr} newPro={true} />
+                        ))}
                     </div>
                 )}
 
                 <div className={cx('product-favourite__link')}>
-                    <Button className={cx('btn')}>Xem tất cả sản phẩm</Button>
+                    <Button to={routesConfig.product} className={cx('btn')}>
+                        Xem tất cả sản phẩm
+                    </Button>
                 </div>
             </div>
 
@@ -79,26 +85,52 @@ function Home() {
                 </div>
 
                 {!!news && (
-                    <div>
-                        {news.map(
-                            (ne) =>
-                                moment().diff(ne.updatedAt, 'days') < 15 && (
-                                    <Link className={cx('news-item')} to={`/news/${ne._id}`} key={ne._id}>
-                                        <div className={cx('content')}>
-                                            <div>
-                                                <img className={cx('img-news-home')} src={Images.logo} alt="Ta Van Quyet" />
-                                            </div>
-                                            <div className={cx('news-title')}>
-                                                <h3>{ne.title}</h3>
-                                            </div>
-                                        </div>
+                    // <div>
+                    //     {news.map((ne) => (
+                    //         <Link className={cx('news-item')} to={`/news/${ne._id}`} key={ne._id}>
+                    //             <div className={cx('content')}>
+                    //                 <div>
+                    //                     <img
+                    //                         className={cx('img-news-home')}
+                    //                         src={`http://localhost:4001/api/news/image/${ne.image}` || Images.logo}
+                    //                         alt="Ta Van Quyet"
+                    //                     />
+                    //                 </div>
+                    //                 <div className={cx('news-title')}>
+                    //                     <h3>{ne.title}</h3>
+                    //                 </div>
+                    //             </div>
 
-                                        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '7px' }}>
-                                            {moment(ne.updatedAt).format('DD - MM - YYYY')}
-                                        </div>
-                                    </Link>
-                                ),
-                        )}
+                    //             <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '7px', alignItems: 'center' }}>
+                    //                 <FontAwesomeIcon style={{ color: '#ccc', marginRight: '2px' }} className={cx('time-news')} icon={faClock} />
+                    //                 {moment(ne.updatedAt).format('DD - MM - YYYY')}
+                    //             </div>
+                    //         </Link>
+                    //     ))}
+                    // </div>
+
+                    <div className={cx('row sm-gutter')}>
+                        {news.map((ne) => (
+                            <Link className={cx('news-item', 'col l-2 m-4 c-6')} to={`/news/${ne._id}`} key={ne._id}>
+                                <div className={cx('content')}>
+                                    <div>
+                                        <img
+                                            className={cx('img-news-home')}
+                                            src={`http://localhost:4001/api/news/image/${ne.image}` || Images.logo}
+                                            alt="Ta Van Quyet"
+                                        />
+                                    </div>
+                                    <div className={cx('news-title')}>
+                                        <h3>{ne.title}</h3>
+                                    </div>
+                                </div>
+
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '7px', alignItems: 'center' }}>
+                                    <FontAwesomeIcon style={{ color: '#ccc', marginRight: '2px' }} className={cx('time-news')} icon={faClock} />
+                                    {moment(ne.updatedAt).format('DD - MM - YYYY')}
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 )}
             </div>

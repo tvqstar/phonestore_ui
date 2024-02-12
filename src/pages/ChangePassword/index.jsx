@@ -1,5 +1,4 @@
-import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,16 +9,18 @@ import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
 import routesConfig from '../../config/routes';
-import styles from './Register.module.scss';
-const cx = classNames.bind(styles);
+import { DataContext } from '../../Provider';
 
-function Register() {
-    // const [email, setEmail] = useState('');
-    // const [pwd, setPwd] = useState('');
-    // const [rePwd, setRePwd] = useState('');
-    const [pwdShow, setPwdShow] = useState(false);
-    const [rePwdShow, setRePwdShow] = useState(false);
-    const [message, setMessage] = useState('');
+import classNames from 'classnames/bind';
+import styles from './ChangePassword.module.scss';
+
+function ChangePassword() {
+    const cx = classNames.bind(styles);
+
+    const value = useContext(DataContext);
+    const [user] = value.user;
+    const reload = value.reload;
+
     const navigate = useNavigate();
 
     const {
@@ -30,6 +31,16 @@ function Register() {
         getValues,
     } = useForm();
 
+    const [message, setMessage] = useState('');
+
+    const [newPwdShow, setNewPwdShow] = useState(false);
+    const [pwdShow, setPwdShow] = useState(false);
+    const [rePwdShow, setRePwdShow] = useState(false);
+
+    const toggleNewPassword = () => {
+        setNewPwdShow(newPwdShow ? false : true);
+    };
+
     const togglePassword = () => {
         setPwdShow(pwdShow ? false : true);
     };
@@ -39,45 +50,63 @@ function Register() {
     };
 
     const onSubmit = (data) => {
-        const username = data.username;
-        const password = data.password;
-
+        setMessage('');
+        const oldPw = data.oldPw;
+        const newPw = data.newPw;
         axios
-            .post('http://localhost:4001/api/user/register', {
-                username,
-                password,
+            .post('http://localhost:4001/api/user/changePW', {
+                userId: user._id,
+                oldPw,
+                newPw,
             })
             .then((res) => {
-                if (res.data.status === 'ERR') {
-                    setMessage(res.data.message);
+                if (res.data.msg === 'SUCCESS') {
+                    swal({
+                        title: 'Thành công!',
+                        text: 'Về trang chủ ngay',
+                        icon: 'success',
+                        buttons: true,
+                        // dangerMode: true,
+                    }).then((ok) => {
+                        if (ok) {
+                            localStorage.removeItem('user');
+                            reload();
+                            navigate('/');
+                        }
+                    });
+                    return;
+                } else if (res.data.status === 'ERR') {
+                    swal({
+                        icon: 'error',
+                        title: `${res.data.msg}`,
+                    });
+                    return;
+                } else {
+                    swal({
+                        icon: 'error',
+                        title: 'CÓ LỖI',
+                    });
                     return;
                 }
-                swal({
-                    icon: 'success',
-                    title: 'Thêm thành công',
-                });
-                setMessage('');
-                navigate('/login');
-                return;
             });
     };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
-                <h2 className={cx('title')}>Đăng ký tài khoản</h2>
+                <h2 className={cx('title')}>Thay đổi mật khẩu</h2>
 
                 {/* Đăng ký thành công */}
                 {!!message && <h3 style={{ color: 'red' }}>{message}</h3>}
 
                 <form className={cx('form-input')} onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('input-item')}>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faLock} />
                         <input
-                            type="text"
-                            placeholder="Nhập tên tài khoản..."
+                            type={newPwdShow ? 'text' : 'password'}
+                            placeholder="Nhập mật khẩu cũ..."
                             spellCheck={false}
-                            {...register('username', {
+                            {...register('oldPw', {
                                 required: 'Trường này không được để trống',
                                 // pattern: {
                                 //     value: /^[A-Z0-9._%+-]+@[[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -85,17 +114,22 @@ function Register() {
                                 // },
                             })}
                         />
+                        <span onClick={toggleNewPassword} style={{ userSelect: 'none' }}>
+                            {newPwdShow && <FontAwesomeIcon className={cx('showPwdIcon')} icon={faEye} />}
+
+                            {!newPwdShow && <FontAwesomeIcon className={cx('showPwdIcon')} icon={faEyeSlash} />}
+                        </span>
                     </div>
 
-                    {errors.username?.message && <span className={cx('show-err')}>{errors.username?.message}</span>}
+                    {errors.oldPw?.message && <span className={cx('show-err')}>{errors.oldPw?.message}</span>}
 
                     <div className={cx('input-item')}>
                         <FontAwesomeIcon icon={faLock} />
                         <input
                             type={pwdShow ? 'text' : 'password'}
-                            placeholder="Nhập mật khẩu..."
+                            placeholder="Nhập mật khẩu mới..."
                             spellCheck={false}
-                            {...register('password', {
+                            {...register('newPw', {
                                 required: 'Trường này không được để trống',
                                 // minLength: {
                                 //     value: 6,
@@ -115,7 +149,7 @@ function Register() {
                         </span>
                     </div>
 
-                    {errors.password?.message && <span className={cx('show-err')}>{errors.password?.message}</span>}
+                    {errors.newPw?.message && <span className={cx('show-err')}>{errors.newPw?.message}</span>}
 
                     <div className={cx('input-item')}>
                         <FontAwesomeIcon icon={faLock} />
@@ -125,7 +159,7 @@ function Register() {
                             spellCheck={false}
                             {...register('rePassword', {
                                 required: 'Trường này không được để trống',
-                                validate: (value) => value === getValues('password') || 'Xác nhận không đúng!',
+                                validate: (value) => value === getValues('newPw') || 'Xác nhận không đúng!',
                             })}
                         />
 
@@ -140,23 +174,16 @@ function Register() {
 
                     <div className={cx('button')}>
                         <button type="submit" className={cx('button-register')}>
-                            Đăng ký
+                            Xác nhận
                         </button>
                         <Link className={cx('button-return')} to={routesConfig.home}>
                             Trở về trang chủ
                         </Link>
                     </div>
                 </form>
-
-                <div className={cx('link')}>
-                    <span>Bạn đã có tài khoản?</span>
-                    <Link className={cx('link-button')} to={routesConfig.login}>
-                        Đăng nhập ngay!
-                    </Link>
-                </div>
             </div>
         </div>
     );
 }
 
-export default Register;
+export default ChangePassword;

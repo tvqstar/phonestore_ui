@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
     cart: '/cart',
+    checkout: '/checkout',
     news: '/news',
     order: '/order',
     login: '/login',
@@ -9,6 +10,7 @@ const routes = {
     productDetail: '/:slug',
     newsDetail: 'news/:id',
     prodByCate: '/product/:nameCate',
+    changePassword: '/change-password',
     notfound: '/*',
 };
 

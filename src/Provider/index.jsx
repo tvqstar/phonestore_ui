@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 
 export const DataContext = createContext();
 
@@ -22,6 +23,24 @@ function Provider({ children }) {
 
     const reload = () => {
         loading ? setLoading(false) : setLoading(true);
+    };
+
+    const decodedJWT = () => {
+        try {
+            const user = localStorage.getItem('user');
+            const initialValue = JSON.parse(user);
+            const token = initialValue.accessToken
+            const decoded = jwtDecode(token);
+            const noww = new Date().getTime() / 1000;
+
+            if (decoded.exp < noww) {
+                localStorage.removeItem('user');
+                reload();
+            }
+        } catch (err) {
+            return false;
+        }
+        return true;
     };
 
     const getCategory = () => {
@@ -102,13 +121,14 @@ function Provider({ children }) {
     };
 
     useEffect(() => {
+        decodedJWT()
         getCategory();
         getProduct();
         getUserForAdmin();
         getCart();
         getOrder();
         getAllOrder();
-        getAllNews()
+        getAllNews();
     }, [loading]);
 
     const value = {

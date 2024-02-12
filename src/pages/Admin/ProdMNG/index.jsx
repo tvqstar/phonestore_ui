@@ -137,12 +137,13 @@ function Product() {
     const lastIndex = numPage * limitPage; // san pham cuoi cua 1 trang
     const firstIndex = lastIndex - limitPage; // san pham dau cua 1 trang
     const totalPage = Math.ceil(products.length / limitPage); // tong cong x trang
-    const record = products.slice(firstIndex, lastIndex); // render san pham
+    const record = [...products].reverse().slice(firstIndex, lastIndex); // render san pham
 
     const handleAddProduct = async (e) => {
         try {
             e.preventDefault();
 
+            setErr('');
             let formData = new FormData();
 
             formData.append('image', data.image);
@@ -155,7 +156,7 @@ function Product() {
             if (!data.name || !data.price || !data.description || !data.slug || !data.category || !data.image) {
                 setErr('Trường dữ liệu không được để trống');
                 return;
-            }else if (!Number.isInteger(data.price) || parseInt(data.price) <= 0) {
+            } else if (parseInt(data.price) <= 0) {
                 setErr('Vui lòng nhập giá tiền lớn hơn 0');
                 return;
             }
@@ -206,6 +207,55 @@ function Product() {
         }
     };
 
+    // Chi edit so luong
+    const handleOnlyEditQty = async (e, proID, col) => {
+        e.preventDefault();
+
+        const qty = e.target.value;
+
+        const pro = products.find((prod) => prod._id == proID);
+        const checkColor = pro.colors.find((color) => color._id == col._id);
+
+        console.log('pro', pro);
+        console.log('checkColor', checkColor);
+        console.log('products', products);
+
+        if (qty > 1000) {
+            swal({
+                icon: 'error',
+                title: `Nên đặt số lượng tối đa 1000`,
+            });
+            return;
+        }
+
+        if (qty < 0) {
+            swal({
+                icon: 'error',
+                title: 'Không để số lượng âm',
+            });
+            return;
+        }
+
+        axios
+            .post('http://localhost:4001/api/product/edit-qty', {
+                proId: proID,
+                qty: qty,
+                colorId: col._id,
+            })
+            .then((res) => {
+                if (res.data.status === 'SUCCESS') {
+                    reload();
+                } else {
+                    swal({
+                        icon: 'error',
+                        title: 'Có lỗi xảy ra',
+                    });
+                }
+                return;
+            });
+    };
+
+    //  Edit san pham
     const Edit = (id) => {
         const prodedit = products.find((prod) => prod._id == id);
         setDataEdit({
@@ -215,7 +265,7 @@ function Product() {
             price: prodedit.price,
             description: prodedit.description,
             image: null,
-            category: prodedit.category,
+            category: prodedit.category._id,
         });
         setColorsEdit(prodedit?.colors);
         setShowEdit(true);
@@ -224,17 +274,7 @@ function Product() {
     const handleEdit = async (e) => {
         try {
             e.preventDefault();
-
-            let formData = new FormData();
-
-            formData.append('image', dataEdit.image);
-            formData.append('name', dataEdit.name);
-            formData.append('slug', dataEdit.slug);
-            formData.append('price', dataEdit.price);
-            formData.append('description', dataEdit.description);
-            formData.append('category', dataEdit.category);
-
-            if (!dataEdit.name || !dataEdit.price || !dataEdit.description || !dataEdit.slug || !dataEdit.category || !dataEdit.image) {
+            if (!dataEdit.name || !dataEdit.price || !dataEdit.description || !dataEdit.slug || !dataEdit.category) {
                 setErr('Trường dữ liệu không được để trống');
                 return;
             }
@@ -242,6 +282,15 @@ function Product() {
                 setErr('Thêm màu sắc');
                 return;
             }
+
+            let formData = new FormData();
+
+            formData.append('image', dataEdit?.image);
+            formData.append('name', dataEdit.name);
+            formData.append('slug', dataEdit.slug);
+            formData.append('price', dataEdit.price);
+            formData.append('description', dataEdit.description);
+            formData.append('category', dataEdit.category);
 
             colorsEdit.forEach((col, index) => {
                 formData.append(`colors[${index}][colorName]`, col.colorName);
@@ -251,7 +300,6 @@ function Product() {
             setLoading(true);
             const res = await axios.post(`http://localhost:4001/api/product/edit/${dataEdit._id}`, formData);
             setLoading(false);
-            console.log(res);
 
             if (res.data.status === 'SUCCESS') {
                 swal({
@@ -288,6 +336,7 @@ function Product() {
         }
     };
 
+    // Xoa san pham
     const handleDelete = (id) => {
         swal({
             title: 'Cảnh báo!',
@@ -303,6 +352,7 @@ function Product() {
         });
     };
 
+    // phan trang
     const handleChangeLimit = (e) => {
         setLimitPage(e.target.value);
         setNumPage(1);
@@ -328,8 +378,8 @@ function Product() {
                     <select className={cx('option-page')} onChange={(e) => handleChangeLimit(e)}>
                         <option value={limitPage}>Lựa chọn số bản ghi</option>
                         <option value={5}>5</option>
-                        <option value={7}>7</option>
                         <option value={10}>10</option>
+                        <option value={30}>30</option>
                     </select>
                 </div>
 
@@ -341,7 +391,7 @@ function Product() {
                             <th className={cx('col l-5 m-4 c-6')}>Tên sản phẩm</th>
                             <th className={cx('col l-1 m-4 c-6')}>Giá tiền</th>
                             <th className={cx('col l-2 m-4 c-6')}>Màu sắc</th>
-                            <th className={cx('col l-1 m-4 c-6')}>Chỉnh sửa mới</th>
+                            <th className={cx('col l-1 m-4 c-6')}>Ngày tạo</th>
                             <th className={cx('col l-1 m-4 c-6')}>Hành động</th>
                         </tr>
                     </thead>
@@ -350,7 +400,7 @@ function Product() {
                         {record.map((prod, index) => {
                             return (
                                 <tr key={prod._id} className={cx('trbody', 'row sm-gutter')}>
-                                    <td className="col l-1 m-4 c-6">{`#${index}`}</td>
+                                    <td className="col l-1 m-4 c-6">{`#${index + 1}`}</td>
                                     <td className={cx('col l-1 m-4 c-6')}>
                                         <div
                                             className={cx('item-img')}
@@ -379,13 +429,19 @@ function Product() {
                                                     <p> - </p>
                                                     <div className={cx('item')}>
                                                         <label>Còn: </label>
-                                                        <p className={cx('')}>{color.inStock}</p>
+                                                        {/* <p className={cx('')}>{color.inStock}</p> */}
+                                                        <input
+                                                            className={cx('qty-input')}
+                                                            type="text"
+                                                            value={color.inStock}
+                                                            onChange={(e) => handleOnlyEditQty(e, prod._id, color)}
+                                                        />
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
                                     </td>
-                                    <td className="col l-1 m-4 c-6">{moment(prod.updatedAt).format('DD-MM-YYYY - HH:mm:ss')}</td>
+                                    <td className="col l-1 m-4 c-6">{moment(prod.createdAt).format('DD-MM-YYYY')}</td>
 
                                     <td className="col l-1 m-4 c-6">
                                         <span className={cx('action')}>
@@ -518,7 +574,7 @@ function Product() {
                         />
                     </div>
 
-                    {err && <div style={{color: 'red', marginLeft: '15px'}}>{err}</div>}
+                    {err && <div style={{ color: 'red', marginLeft: '15px' }}>{err}</div>}
 
                     <div className={cx('footer-btn')}>
                         <button className={cx('btn', 'btn-save')} onClick={(e) => handleAddProduct(e)}>
@@ -653,7 +709,7 @@ function Product() {
                         />
                     </div>
 
-                    {err && <div style={{color: 'red', marginLeft: '15px'}}>{err}</div>}
+                    {err && <div style={{ color: 'red', marginLeft: '15px' }}>{err}</div>}
 
                     <div className={cx('footer-btn')}>
                         <button className={cx('btn', 'btn-save')} onClick={(e) => handleEdit(e)}>

@@ -30,6 +30,7 @@ function EditNews() {
     const [news, setNews] = useState({
         title: ne.title,
         content: ne.content,
+        image: ne.image,
     });
 
     const [loadingAdd, setLoadingAdd] = useState(false);
@@ -50,10 +51,16 @@ function EditNews() {
                 return;
             }
 
+            let formData = new FormData();
+
+            formData.append('image', news?.image);
+            formData.append('title', news.title);
+            formData.append('content', news.content);
+
             setLoadingAdd(true);
             await delay(2000);
 
-            const res = await axios.put(`http://localhost:4001/api/news/edit/${id}`, news);
+            const res = await axios.put(`http://localhost:4001/api/news/edit/${id}`, formData);
             setLoadingAdd(false);
 
             if (res.data.status === 'SUCCESS') {
@@ -125,6 +132,18 @@ function EditNews() {
                                 onChange={(e) => setNews({ ...news, title: e.target.value })}
                             />
                         </div>
+
+                        <div>
+                            <h3>Ảnh đại diện</h3>
+                            <input
+                                className={cx('input-img')}
+                                type="file"
+                                name="filename"
+                                // value={data.description}
+                                onChange={(e) => setNews({ ...news, image: e.target?.files[0] })}
+                            />
+                        </div>
+
                         <div>
                             <h3>Nội dung</h3>
                             <ReactQuill

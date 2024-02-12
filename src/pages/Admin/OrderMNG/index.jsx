@@ -13,6 +13,7 @@ import swal from 'sweetalert';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
 function OrderMNG() {
     const cx = classNames.bind(styles);
@@ -23,11 +24,11 @@ function OrderMNG() {
 
     // Phan trang
     const [numPage, setNumPage] = useState(1); // Trang so x
-    const [limitPage, setLimitPage] = useState(3); // So san pham cho 1 trang
+    const [limitPage, setLimitPage] = useState(10); // So san pham cho 1 trang
     const lastIndex = numPage * limitPage; // san pham cuoi cua 1 trang
     const firstIndex = lastIndex - limitPage; // san pham dau cua 1 trang
     const totalPage = Math.ceil(allOrder.length / limitPage); // tong cong x trang
-    const record = allOrder.slice(firstIndex, lastIndex); // render san pham
+    const record = [...allOrder].reverse().slice(firstIndex, lastIndex); // render san pham
 
     const [showEdit, setShowEdit] = useState(false);
     const [showItems, setShowItems] = useState(false);
@@ -80,11 +81,11 @@ function OrderMNG() {
         }
     };
 
-    const viewItems = (id) => {
-        const view = record.find((od) => od._id == id);
-        setDataItems([...view.items]);
-        setShowItems(true);
-    };
+    // const viewItems = (id) => {
+    //     const view = record.find((od) => od._id == id);
+    //     setDataItems([...view.items]);
+    //     setShowItems(true);
+    // };
 
     const handleChangeLimit = (e) => {
         setLimitPage(e.target.value);
@@ -106,9 +107,9 @@ function OrderMNG() {
                 <div className={cx('option', 'row sm-gutter')}>
                     <select className={cx('option-page')} onChange={(e) => handleChangeLimit(e)}>
                         <option value={limitPage}>Lựa chọn số bản ghi</option>
-                        <option value={3}>3</option>
-                        <option value={5}>5</option>
                         <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={30}>30</option>
                     </select>
                 </div>
 
@@ -120,7 +121,7 @@ function OrderMNG() {
                             <th className={cx('col l-2 m-4 c-6')}>Số điện thoại</th>
                             <th className={cx('col l-2 m-4 c-6')}>Trạng thái</th>
                             <th className={cx('col l-1 m-4 c-6')}>Tổng tiền</th>
-                            <th className={cx('col l-1 m-4 c-6')}>Cập nhật mới</th>
+                            <th className={cx('col l-1 m-4 c-6')}>Ngày đặt</th>
                             <th className={cx('col l-1 m-4 c-6')}>Hành động</th>
                         </tr>
                     </thead>
@@ -149,18 +150,25 @@ function OrderMNG() {
                                         <h4>{VND.format(orderItem.totalPrice)}</h4>
                                     </td>
 
-                                    <td className="col l-1 m-4 c-6">{moment(orderItem.updatedAt).format('DD-MM-YYYY')}</td>
+                                    <td className="col l-1 m-4 c-6">{moment(orderItem.createdAt).format('DD-MM-YYYY')}</td>
 
                                     <td className="col l-1 m-4 c-6">
                                         <span className={cx('action')}>
                                             <Tippy delay={[0, 100]} content="Xem chi tiết" placement="left">
-                                                <button className={cx('watch')} onClick={() => viewItems(orderItem._id)}>
+                                                {/* <Link to={`/${orderItem._id}`} className={cx('watch')} onClick={() => viewItems(orderItem._id)}> */}
+                                                <Link to={`/admin/order/${orderItem._id}`} className={cx('watch')}>
                                                     <FontAwesomeIcon icon={faEye} />
-                                                </button>
+                                                </Link>
                                             </Tippy>
 
                                             <Tippy delay={[0, 100]} content="Thay đổi" placement="top">
-                                                <button onClick={() => Edit(orderItem._id)} className={cx('check')}>
+                                                <button
+                                                    onClick={() => Edit(orderItem._id)}
+                                                    className={cx(
+                                                        'check',
+                                                        `${orderItem.status == 'Đã hủy' || orderItem.status == 'Đã giao' ? 'disable' : ''}`,
+                                                    )}
+                                                >
                                                     <FontAwesomeIcon className={cx('edit-icon')} icon={faPenToSquare} />
                                                 </button>
                                             </Tippy>

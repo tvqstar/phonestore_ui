@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import Images from '../../assets/Images/Images';
 
 import classNames from 'classnames/bind';
 import styles from './Slider.module.scss';
@@ -9,15 +10,27 @@ const cx = classNames.bind(styles);
 
 const sliderImage = [
     {
-        img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg',
+        img: Images.slider1,
     },
     {
-        img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa860f3b25f8e37cb0f30_ssa.jpg',
+        img: Images.slider2,
     },
     {
-        img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa8abeb91232c4a5e964f_hw.jpg',
+        img: Images.slider3,
     },
 ];
+
+// const sliderImage = [
+//     {
+//         img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg',
+//     },
+//     {
+//         img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa860f3b25f8e37cb0f30_ssa.jpg',
+//     },
+//     {
+//         img: 'https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa8abeb91232c4a5e964f_hw.jpg',
+//     },
+// ];
 
 function Slider() {
     const [slideCurr, setSlideCurr] = useState(0);

@@ -9,7 +9,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import styles from './Product.module.scss';
 // import routesConfig from '~/config/routes';
 
-function Product({ data }) {
+function Product({ data, newPro }) {
     const cx = classNames.bind(styles);
 
     const VND = new Intl.NumberFormat('vi-VN', {
@@ -34,7 +34,7 @@ function Product({ data }) {
                         <span className={cx('price-current')}>{`${VND.format(data.price)}`}</span>
                     </div>
 
-                    {moment().diff(data.updatedAt, 'days') < 7 && (
+                    {newPro && (
                         <div className={cx('product-favourite')}>
                             <FontAwesomeIcon className={cx('icon_favourite')} icon={faCheck} />
                             <span>Mới nhất</span>

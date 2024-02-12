@@ -220,3 +220,18 @@
 
 .btnSave {
 }
+
+.input-img {
+    margin-top: 4px;
+    margin-bottom: 10px;
+    padding: 4px;
+    color: #333;
+    caret-color: #f44336;
+    font-size: 1.8rem;
+    border: 1px solid #ccc;
+    width: 95%;
+
+    &:focus-within {
+        border-color: #457b9d;
+    }
+}

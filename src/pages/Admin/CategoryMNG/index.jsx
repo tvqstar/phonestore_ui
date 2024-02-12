@@ -190,7 +190,7 @@ function CategoryMNG() {
                             return (
                                 <tr key={cate._id} className={cx('trbody', 'row sm-gutter')}>
                                     <td className="col l-1 m-4 c-6">
-                                        <h4>{index}</h4>
+                                        <h4>{`#${index+1}`}</h4>
                                     </td>
 
                                     <td className="col l-3 m-4 c-6">

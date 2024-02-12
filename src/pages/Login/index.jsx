@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 
-
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +9,7 @@ import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-s
 import routesConfig from '../../config/routes';
 import styles from './Login.module.scss';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +29,9 @@ function Login() {
         formState: { errors },
     } = useForm();
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const onSubmit = (data) => {
+        delay(2000);
         axios
             .post('http://localhost:4001/api/user/login', {
                 username: data.username,
@@ -37,6 +39,13 @@ function Login() {
             })
             .then((res) => {
                 if (res.data.msg === 'SUCCESS') {
+                    if (!res.data.status) {
+                        swal({
+                            icon: 'error',
+                            title: 'Tài khoản ngưng hoạt động',
+                        });
+                        return;
+                    }
                     localStorage.setItem('user', JSON.stringify(res.data));
                     if (res.data.isAdmin) {
                         navigate('/');
@@ -46,12 +55,12 @@ function Login() {
                         window.location.reload(true);
                     }
                     return;
-                }else {
+                } else {
                     setMessage(res.data);
                     return;
                 }
             });
-        };
+    };
 
     const togglePassword = () => {
         setPwdShow(pwdShow ? false : true);
@@ -61,13 +70,13 @@ function Login() {
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
                 <h2 className={cx('title')}>Đăng nhập</h2>
-                {!!message && <h3 style={{color: 'red'}}>{message}</h3>}
+                {!!message && <h3 style={{ color: 'red' }}>{message}</h3>}
                 <form className={cx('input')} onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('input-item')}>
                         <FontAwesomeIcon icon={faEnvelope} />
                         <input
                             type="text"
-                            placeholder="Nhập username..."
+                            placeholder="Nhập tên tài khoản..."
                             {...register('username', {
                                 required: 'Trường này không được để trống',
                                 // pattern: {

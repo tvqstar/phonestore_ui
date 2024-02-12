@@ -80,23 +80,25 @@ function AdminHome() {
 
             <div className={cx('sales')}>
                 <div className={cx('sales-header')}>
-                    <h1>Số đơn trong {count} ngày qua</h1>
+                    <h1>{`${count < 100 ? `Số đơn trong ${count} ngày qua` : `Tất cả đơn hàng`}`}</h1>
+                    {/* <h1>Số đơn trong {count} ngày qua</h1> */}
 
                     <select className={cx('option-page')} onChange={(e) => setCount(e.target.value)}>
                         <option value={count}>Lựa chọn thời gian</option>
                         <option value={7}>7 ngày qua</option>
                         <option value={30}>30 ngày qua</option>
                         <option value={90}>90 ngày qua</option>
+                        <option value={90000000}>Tất cả</option>
                     </select>
                 </div>
 
                 <div>
-                    <span style={{ fontSize: '2.2rem' }}>{sales?.length || 0} đơn hàng</span>
+                    <span style={{ fontSize: '2.2rem' }}>{sales?.length || 0} đơn hàng đã giao</span>
                 </div>
 
                 <div className={cx('sales-total')}>
                     <span>
-                        Tổng thu: <span style={{color: 'red'}}>{VND.format(total)}</span>
+                        Tổng thu: <span style={{ color: 'red' }}>{VND.format(total)}</span>
                     </span>
                 </div>
             </div>
