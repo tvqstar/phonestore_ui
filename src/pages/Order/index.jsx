@@ -70,7 +70,7 @@ function Order() {
 
             setLoading(true);
             await delay(2000);
-            const res = await axios.put(`http://localhost:4001/api/order/edit/${id}`, {
+            const res = await axios.put(`https://phone-tv49.onrender.com/api/order/edit/${id}`, {
                 status: 'Đã hủy',
             });
             setLoading(false);
@@ -129,7 +129,7 @@ function Order() {
                                                 <div
                                                     className={cx('item-img')}
                                                     style={{
-                                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -200,7 +200,7 @@ function Order() {
                                                 <div
                                                     className={cx('item-img')}
                                                     style={{
-                                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -270,7 +270,7 @@ function Order() {
                                                 <div
                                                     className={cx('item-img')}
                                                     style={{
-                                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -340,7 +340,7 @@ function Order() {
                                                 <div
                                                     className={cx('item-img')}
                                                     style={{
-                                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -410,7 +410,7 @@ function Order() {
                                                 <div
                                                     className={cx('item-img')}
                                                     style={{
-                                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                                     }}
                                                 ></div>
                                             </div>

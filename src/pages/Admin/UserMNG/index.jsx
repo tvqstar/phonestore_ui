@@ -52,7 +52,7 @@ function UserMNG() {
             e.preventDefault();
 
             setLoading(true);
-            const res = await axios.put(`http://localhost:4001/api/user/edit/${dataUserEdit._id}`, {
+            const res = await axios.put(`https://phone-tv49.onrender.com/api/user/edit/${dataUserEdit._id}`, {
                 isAdmin: dataUserEdit.isAdmin,
                 status: dataUserEdit.status,
             });
@@ -64,7 +64,7 @@ function UserMNG() {
                     title: 'Cập nhật thành công',
                 });
                 reload();
-                setShow(false)
+                setShow(false);
                 return;
             } else {
                 swal({
@@ -120,7 +120,7 @@ function UserMNG() {
                         {record?.map((user, index) => {
                             return (
                                 <tr key={user._id} className={cx('trbody', 'row sm-gutter')}>
-                                    <td className="col l-1 m-4 c-6">{`#${index+1}`}</td>
+                                    <td className="col l-1 m-4 c-6">{`#${index + 1}`}</td>
 
                                     <td className="col l-2 m-4 c-6">
                                         <h4 className={cx('item-name')}>{user.username}</h4>

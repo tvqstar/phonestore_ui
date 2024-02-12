@@ -171,7 +171,7 @@ function Product() {
             });
 
             setLoading(true);
-            const res = await axios.post(`http://localhost:4001/api/product/add-product`, formData);
+            const res = await axios.post(`https://phone-tv49.onrender.com/api/product/add-product`, formData);
             setLoading(false);
 
             if (res.data.status === 'SUCCESS') {
@@ -237,7 +237,7 @@ function Product() {
         }
 
         axios
-            .post('http://localhost:4001/api/product/edit-qty', {
+            .post('https://phone-tv49.onrender.com/api/product/edit-qty', {
                 proId: proID,
                 qty: qty,
                 colorId: col._id,
@@ -298,7 +298,7 @@ function Product() {
             });
 
             setLoading(true);
-            const res = await axios.post(`http://localhost:4001/api/product/edit/${dataEdit._id}`, formData);
+            const res = await axios.post(`https://phone-tv49.onrender.com/api/product/edit/${dataEdit._id}`, formData);
             setLoading(false);
 
             if (res.data.status === 'SUCCESS') {
@@ -346,7 +346,7 @@ function Product() {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                axios.delete(`http://localhost:4001/api/product/delete/${id}`);
+                axios.delete(`https://phone-tv49.onrender.com/api/product/delete/${id}`);
                 reload();
             }
         });
@@ -405,7 +405,7 @@ function Product() {
                                         <div
                                             className={cx('item-img')}
                                             style={{
-                                                backgroundImage: `url(http://localhost:4001/api/product/image/${prod.image})`,
+                                                backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${prod.image})`,
                                             }}
                                         ></div>
                                     </td>

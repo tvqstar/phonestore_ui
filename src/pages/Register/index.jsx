@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import swal from 'sweetalert';
 
@@ -40,11 +40,13 @@ function Register() {
 
     const onSubmit = (data) => {
         const username = data.username;
+        const email = data.email;
         const password = data.password;
 
         axios
-            .post('http://localhost:4001/api/user/register', {
+            .post('https://phone-tv49.onrender.com/api/user/register', {
                 username,
+                email,
                 password,
             })
             .then((res) => {
@@ -54,7 +56,7 @@ function Register() {
                 }
                 swal({
                     icon: 'success',
-                    title: 'Thêm thành công',
+                    title: 'Đăng ký thành công',
                 });
                 setMessage('');
                 navigate('/login');
@@ -72,7 +74,7 @@ function Register() {
 
                 <form className={cx('form-input')} onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('input-item')}>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faUser} />
                         <input
                             type="text"
                             placeholder="Nhập tên tài khoản..."
@@ -88,6 +90,29 @@ function Register() {
                     </div>
 
                     {errors.username?.message && <span className={cx('show-err')}>{errors.username?.message}</span>}
+
+                    <div className={cx('input-item')}>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        <input
+                            type="email"
+                            placeholder="Nhập email..."
+                            spellCheck={false}
+                            {...register('email', {
+                                required: 'Trường này không được để trống',
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: 'Vui lòng nhập đúng email',
+                                },
+                            })}
+                            // ***********************************
+                            // value={email}
+                            // onChange={(e) => {
+                            //     setEmail(e.target.value);
+                            // }}
+                        />
+                    </div>
+
+                    {errors.email?.message && <span className={cx('show-err')}>{errors.email?.message}</span>}
 
                     <div className={cx('input-item')}>
                         <FontAwesomeIcon icon={faLock} />

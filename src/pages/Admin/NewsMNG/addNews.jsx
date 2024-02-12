@@ -44,18 +44,16 @@ function AddNews() {
                 return;
             }
 
-            
             let formData = new FormData();
-            
+
             formData.append('image', news.image);
             formData.append('title', news.title);
             formData.append('content', news.content);
-            
 
             setLoadingAdd(true);
             await delay(2000);
 
-            const res = await axios.post(`http://localhost:4001/api/news/add`, formData);
+            const res = await axios.post(`https://phone-tv49.onrender.com/api/news/add`, formData);
             setLoadingAdd(false);
 
             if (res.data.status === 'SUCCESS') {

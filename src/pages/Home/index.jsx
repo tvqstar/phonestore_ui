@@ -43,6 +43,8 @@ function Home() {
                     </div>
                 )}
 
+                {!products || (products == null && <p>Quá trình tải dữ liệu từ mongodb atlas có thể mất hơn 2 phút! Vui lòng đợi</p>)}
+
                 <div className={cx('product-favourite__link')}>
                     <Button to={routesConfig.product} className={cx('btn')}>
                         Xem tất cả sản phẩm
@@ -92,7 +94,7 @@ function Home() {
                     //                 <div>
                     //                     <img
                     //                         className={cx('img-news-home')}
-                    //                         src={`http://localhost:4001/api/news/image/${ne.image}` || Images.logo}
+                    //                         src={`https://phone-tv49.onrender.com/api/news/image/${ne.image}` || Images.logo}
                     //                         alt="Ta Van Quyet"
                     //                     />
                     //                 </div>
@@ -116,7 +118,7 @@ function Home() {
                                     <div>
                                         <img
                                             className={cx('img-news-home')}
-                                            src={`http://localhost:4001/api/news/image/${ne.image}` || Images.logo}
+                                            src={`https://phone-tv49.onrender.com/api/news/image/${ne.image}` || Images.logo}
                                             alt="Ta Van Quyet"
                                         />
                                     </div>

@@ -65,7 +65,7 @@ function CheckOut() {
             setLoading(true);
             await delay(2000);
 
-            const res = await axios.post('http://localhost:4001/api/order/add', {
+            const res = await axios.post('https://phone-tv49.onrender.com/api/order/add', {
                 user: user._id,
                 name: order.name,
                 phone: order.phone,
@@ -159,7 +159,7 @@ function CheckOut() {
                                     <div
                                         className={cx('item-img')}
                                         style={{
-                                            backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                            backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                         }}
                                     ></div>
                                 </div>

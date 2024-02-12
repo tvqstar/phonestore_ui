@@ -41,7 +41,7 @@ function NewsMNG() {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                axios.delete(`http://localhost:4001/api/news/delete/${id}`);
+                axios.delete(`https://phone-tv49.onrender.com/api/news/delete/${id}`);
                 reload();
             }
         });
@@ -79,7 +79,7 @@ function NewsMNG() {
                                 <div>
                                     <img
                                         className={cx('img-news')}
-                                        src={`http://localhost:4001/api/news/image/${news.image}` || Images.logo}
+                                        src={`https://phone-tv49.onrender.com/api/news/image/${news.image}` || Images.logo}
                                         alt="Ta Van Quyet"
                                     />
                                 </div>

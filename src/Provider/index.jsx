@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
 export const DataContext = createContext();
 
@@ -29,7 +29,7 @@ function Provider({ children }) {
         try {
             const user = localStorage.getItem('user');
             const initialValue = JSON.parse(user);
-            const token = initialValue.accessToken
+            const token = initialValue.accessToken;
             const decoded = jwtDecode(token);
             const noww = new Date().getTime() / 1000;
 
@@ -45,7 +45,7 @@ function Provider({ children }) {
 
     const getCategory = () => {
         axios
-            .get(`http://localhost:4001/api/product/category/`)
+            .get(`https://phone-tv49.onrender.com/api/product/category/`)
             .then((res) => {
                 setCategory(res.data);
             })
@@ -56,7 +56,7 @@ function Provider({ children }) {
 
     const getProduct = () => {
         axios
-            .get(`http://localhost:4001/api/product/get-product`)
+            .get(`https://phone-tv49.onrender.com/api/product/get-product`)
             .then((res) => {
                 setProduct(res.data);
             })
@@ -67,7 +67,7 @@ function Provider({ children }) {
 
     const getUserForAdmin = () => {
         axios
-            .get(`http://localhost:4001/api/user/allUser`)
+            .get(`https://phone-tv49.onrender.com/api/user/allUser`)
             .then((res) => {
                 setAllUser(res.data);
             })
@@ -78,7 +78,7 @@ function Provider({ children }) {
 
     const getCart = () => {
         axios
-            .get(`http://localhost:4001/api/cart/get-cart/${user._id}`)
+            .get(`https://phone-tv49.onrender.com/api/cart/get-cart/${user._id}`)
             .then((res) => {
                 setCart(res.data);
             })
@@ -89,7 +89,7 @@ function Provider({ children }) {
 
     const getOrder = () => {
         axios
-            .get(`http://localhost:4001/api/order/${user._id}`)
+            .get(`https://phone-tv49.onrender.com/api/order/${user._id}`)
             .then((res) => {
                 setOrder(res.data);
             })
@@ -100,7 +100,7 @@ function Provider({ children }) {
 
     const getAllOrder = () => {
         axios
-            .get(`http://localhost:4001/api/order/all`)
+            .get(`https://phone-tv49.onrender.com/api/order/all`)
             .then((res) => {
                 setAllOrder(res.data);
             })
@@ -111,7 +111,7 @@ function Provider({ children }) {
 
     const getAllNews = () => {
         axios
-            .get(`http://localhost:4001/api/news/allNews`)
+            .get(`https://phone-tv49.onrender.com/api/news/allNews`)
             .then((res) => {
                 setAllNews(res.data);
             })
@@ -121,7 +121,7 @@ function Provider({ children }) {
     };
 
     useEffect(() => {
-        decodedJWT()
+        decodedJWT();
         getCategory();
         getProduct();
         getUserForAdmin();

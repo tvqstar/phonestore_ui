@@ -47,7 +47,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await axios.get(`http://localhost:4001/api/product/search?name=${debounced}`);
+            const result = await axios.get(`https://phone-tv49.onrender.com/api/product/search?name=${debounced}`);
             // console.log(result.data.products);
 
             setSearchResult(result.data.products);
@@ -79,7 +79,11 @@ function Search() {
                             <h3 style={{ marginLeft: '5px' }}>Sản phẩm tìm thấy</h3>
                             {searchResult.slice(0, 5).map((result) => (
                                 <Link key={result._id} className={cx('prod-items')} to={`/${result.slug}`}>
-                                    <img className={cx('avatar')} src={`http://localhost:4001/api/product/image/${result.image}`} alt={result.name} />
+                                    <img
+                                        className={cx('avatar')}
+                                        src={`https://phone-tv49.onrender.com/api/product/image/${result.image}`}
+                                        alt={result.name}
+                                    />
                                     <div className={cx('info')}>
                                         <p className={cx('name')}>
                                             <span>{result.name}</span>
@@ -96,12 +100,12 @@ function Search() {
                     <input
                         ref={inputRef}
                         value={searchValue}
-                        placeholder= {text}
+                        placeholder={text}
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}
                     />
-                    
+
                     {!!searchValue && !loading && (
                         <button className={cx('search-clear-btn')} onClick={handleClear}>
                             <FontAwesomeIcon icon={faCircleXmark} />

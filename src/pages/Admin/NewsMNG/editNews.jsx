@@ -60,7 +60,7 @@ function EditNews() {
             setLoadingAdd(true);
             await delay(2000);
 
-            const res = await axios.put(`http://localhost:4001/api/news/edit/${id}`, formData);
+            const res = await axios.put(`https://phone-tv49.onrender.com/api/news/edit/${id}`, formData);
             setLoadingAdd(false);
 
             if (res.data.status === 'SUCCESS') {

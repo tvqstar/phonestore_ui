@@ -54,7 +54,7 @@ function ChangePassword() {
         const oldPw = data.oldPw;
         const newPw = data.newPw;
         axios
-            .post('http://localhost:4001/api/user/changePW', {
+            .post('https://phone-tv49.onrender.com/api/user/changePW', {
                 userId: user._id,
                 oldPw,
                 newPw,

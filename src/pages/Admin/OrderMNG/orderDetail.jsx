@@ -112,7 +112,7 @@ function OrderDetail() {
                                             <img
                                                 className={cx('image-order-detail')}
                                                 alt="Ảnh sản phẩm"
-                                                src={`http://localhost:4001/api/product/image/${item.image}`}
+                                                src={`https://phone-tv49.onrender.com/api/product/image/${item.image}`}
                                             />
                                         </td>
 

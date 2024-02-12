@@ -50,7 +50,7 @@ function CategoryMNG() {
         }
 
         setLoading(true);
-        const res = await axios.post(`http://localhost:4001/api/product/add-category`, { name });
+        const res = await axios.post(`https://phone-tv49.onrender.com/api/product/add-category`, { name });
         setLoading(false);
 
         if (res.data.status === 'SUCCESS') {
@@ -83,7 +83,7 @@ function CategoryMNG() {
             e.preventDefault();
 
             setLoading(true);
-            const res = await axios.put(`http://localhost:4001/api/product/edit-category/${dataCate._id}`, {
+            const res = await axios.put(`https://phone-tv49.onrender.com/api/product/edit-category/${dataCate._id}`, {
                 name: dataCate.name,
             });
             setLoading(false);
@@ -120,7 +120,7 @@ function CategoryMNG() {
         }).then((willDelete) => {
             if (willDelete) {
                 setLoading(true);
-                axios.delete(`http://localhost:4001/api/product/delete-category/${id}`);
+                axios.delete(`https://phone-tv49.onrender.com/api/product/delete-category/${id}`);
                 setLoading(false);
                 reload();
             }
@@ -190,7 +190,7 @@ function CategoryMNG() {
                             return (
                                 <tr key={cate._id} className={cx('trbody', 'row sm-gutter')}>
                                     <td className="col l-1 m-4 c-6">
-                                        <h4>{`#${index+1}`}</h4>
+                                        <h4>{`#${index + 1}`}</h4>
                                     </td>
 
                                     <td className="col l-3 m-4 c-6">
@@ -225,7 +225,7 @@ function CategoryMNG() {
                 <Modal show={showEdit} onClose={() => setShowEdit(false)}>
                     <div className={cx('content')}>
                         <div className={cx('content-value')}>
-                            <h3 style={{margin: '5px'}}>Tên danh mục mới</h3>
+                            <h3 style={{ margin: '5px' }}>Tên danh mục mới</h3>
                             <input
                                 className={cx('input')}
                                 type="text"

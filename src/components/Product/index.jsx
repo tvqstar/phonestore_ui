@@ -23,7 +23,7 @@ function Product({ data, newPro }) {
                     <div
                         className={cx('imgPro')}
                         style={{
-                            backgroundImage: `url(http://localhost:4001/api/product/image/${data.image})`,
+                            backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${data.image})`,
                         }}
                     ></div>
 

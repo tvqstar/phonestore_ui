@@ -46,7 +46,7 @@ function Cart() {
         }
         // const co = product.quantity - 1
         axios
-            .post('http://localhost:4001/api/cart/edit', {
+            .post('https://phone-tv49.onrender.com/api/cart/edit', {
                 id,
                 qty: product.quantity - 1,
                 product_Id: product._id,
@@ -77,7 +77,7 @@ function Cart() {
         }
 
         axios
-            .post('http://localhost:4001/api/cart/edit', {
+            .post('https://phone-tv49.onrender.com/api/cart/edit', {
                 id,
                 qty: product.quantity + 1,
                 product_Id: product._id,
@@ -121,7 +121,7 @@ function Cart() {
         }
 
         axios
-            .post('http://localhost:4001/api/cart/edit', {
+            .post('https://phone-tv49.onrender.com/api/cart/edit', {
                 id,
                 qty: qtyDebounce,
                 product_Id: product._id,
@@ -150,7 +150,7 @@ function Cart() {
             if (willDelete) {
                 const id = user._id;
                 axios
-                    .post('http://localhost:4001/api/cart/delete', {
+                    .post('https://phone-tv49.onrender.com/api/cart/delete', {
                         id,
                         product_Id: product._id,
                     })
@@ -188,7 +188,7 @@ function Cart() {
                                 <div
                                     className={cx('item-img')}
                                     style={{
-                                        backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                        backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                     }}
                                 ></div>
                             </div>

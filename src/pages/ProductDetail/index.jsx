@@ -107,7 +107,7 @@ function ProductDetail() {
         };
 
         axios
-            .post('http://localhost:4001/api/cart/add', {
+            .post('https://phone-tv49.onrender.com/api/cart/add', {
                 id,
                 items,
             })
@@ -142,7 +142,7 @@ function ProductDetail() {
                             <div
                                 className={cx('image')}
                                 style={{
-                                    backgroundImage: `url(http://localhost:4001/api/product/image/${detailProduct.image})`,
+                                    backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${detailProduct.image})`,
                                 }}
                             ></div>
 

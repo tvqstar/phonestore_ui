@@ -55,7 +55,7 @@ function OrderMNG() {
             e.preventDefault();
 
             setLoading(true);
-            const res = await axios.put(`http://localhost:4001/api/order/edit/${dataOrderEdit._id}`, {
+            const res = await axios.put(`https://phone-tv49.onrender.com/api/order/edit/${dataOrderEdit._id}`, {
                 status: dataOrderEdit.status,
             });
             setLoading(false);
@@ -197,7 +197,7 @@ function OrderMNG() {
                                         <div
                                             className={cx('item-img')}
                                             style={{
-                                                backgroundImage: `url(http://localhost:4001/api/product/image/${product.image})`,
+                                                backgroundImage: `url(https://phone-tv49.onrender.com/api/product/image/${product.image})`,
                                             }}
                                         ></div>
                                     </div>

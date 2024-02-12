@@ -39,7 +39,7 @@ function AllProduct() {
     // const [pro, setPro] = useState([]);
     // useEffect(() => {
     //     axios
-    //         .get(`http://localhost:4001/api/product/get-product`)
+    //         .get(`https://phone-tv49.onrender.com/api/product/get-product`)
     //         .then((res) => {
     //             setPro(res.data);
     //         })
